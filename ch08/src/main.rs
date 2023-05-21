@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use std::collections::hash_map::Entry;
+use std::collections::HashMap;
 use std::io;
 
 fn main() {
@@ -34,8 +34,12 @@ fn main() {
         if words[0].eq("Add") && words[2].eq("to") {
             let new_employee = words[1].to_string();
             match employees_by_department.entry(words[3].to_string()) {
-                Entry::Vacant(e) => { e.insert(vec![new_employee]); },
-                Entry::Occupied(mut e) => { e.get_mut().push(new_employee); },
+                Entry::Vacant(e) => {
+                    e.insert(vec![new_employee]);
+                }
+                Entry::Occupied(mut e) => {
+                    e.get_mut().push(new_employee);
+                }
             };
         }
     }
@@ -60,7 +64,7 @@ fn pig_latin(words: &Vec<&str>) -> Vec<String> {
         for (i, c) in chars.enumerate() {
             if !vowels.contains(&c) {
                 let left = &w[0..i];
-                let right = &w[i+1..];
+                let right = &w[i + 1..];
                 return format!("{}{}-{}", left, right, c);
             }
         }
